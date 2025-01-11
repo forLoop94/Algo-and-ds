@@ -21,7 +21,7 @@ class LinkedList {
 		if (i === 0) {
 			return current
 		} else {
-			while (current.next_node) {
+			while (current) {
 				if (count === i) {
 					return current;
 				}
@@ -37,13 +37,32 @@ class LinkedList {
 		if (i === 0) {
 			return current.value
 		} else {
-			while (current.next_node) {
+			while (current) {
 				if (count === i) {
 					return current.value;
 				}
 				current = current.next_node;
 				count++;
 			}
+		}
+	}
+  
+  insertAt(i, n) {
+		if (i === 0) {
+			let nextNode = this.head;
+			let prevNode = new Node(n)
+			this.head = prevNode;
+			prevNode.next_node = nextNode;
+			this.size++;
+		} else if (i >= this.size) {
+			console.log("Unprocessable Entity");
+		} else {
+			let prevNode = this.getNodeAt(i - 1);
+			let nextNode = this.getNodeAt(i);
+			const newNode = new Node(n);
+			prevNode.next_node = newNode;
+			newNode.next_node = nextNode;
+			this.size++;
 		}
 	}
 }
@@ -55,6 +74,7 @@ list.add(5)
 list.add(6)
 list.add(8)
 list.add(9)
+list.insertAt(5, 2)
 
 console.log(list.getValueAt(4))
 console.log(list)
