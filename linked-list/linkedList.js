@@ -1,3 +1,10 @@
+class Node {
+  constructor(value, next_node = null) {
+    this.value = value;
+    this.next_node = next_node
+  }
+}
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -65,6 +72,23 @@ class LinkedList {
 			this.size++;
 		}
 	}
+
+  deleteAt(i) {
+		if(i === 0) {
+			let nextNode = this.getNodeAt(i + 1);
+			let currentNode = this.getNodeAt(i);
+			this.head = nextNode;
+			this.size--;
+			return currentNode
+		} else {
+			let currentNode = this.getNodeAt(i);
+			let prevNode = this.getNodeAt(i + 1);
+			let nextNode = this.getNodeAt(i + 1);
+			prevNode.next_node = nextNode;
+			this.size--;
+			return currentNode
+		}
+	}
 }
 
 const list = new LinkedList();
@@ -75,6 +99,7 @@ list.add(6)
 list.add(8)
 list.add(9)
 list.insertAt(5, 2)
+list.deleteAt(4)
 
 console.log(list.getValueAt(4))
 console.log(list)
